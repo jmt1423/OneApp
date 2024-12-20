@@ -29,6 +29,7 @@ export default function LoginForm() {
             isRequired
             label="Email"
             labelPlacement="outside"
+            errorMessage="Please enter a valid email"
             name="email"
             placeholder="Enter your email"
             type="email"
@@ -53,6 +54,7 @@ export default function LoginForm() {
             }
             label="Password"
             labelPlacement="outside"
+            errorMessage="Please enter a password"
             name="password"
             placeholder="Enter your password"
             type={isVisible ? "text" : "password"}
