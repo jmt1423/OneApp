@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   Avatar,
   Button,
@@ -17,18 +18,14 @@ interface EventCardProps extends CardProps {
   time?: Date;
 }
 
-export function EventCard({
+const EventCardComponent: React.FC<EventCardProps> = ({
   title = "Meeting 1",
   location = "323 Corporate Drive",
   time = new Date(2024, 12, 24, 5, 30),
   ...props
-}: EventCardProps) {
+}) => {
   return (
-    <Card
-      className="overflow-none relative w-44 border-none"
-      {...props}
-      shadow="md"
-    >
+    <Card className="overflow-none relative w-44 border-none" {...props}>
       <CardHeader>
         <div className="flex items-center gap-3 p-0 mb-0">
           <p className="text-sm font-medium text-white">{title}</p>
@@ -54,4 +51,6 @@ export function EventCard({
       </CardFooter>
     </Card>
   );
-}
+};
+
+export default React.memo(EventCardComponent);

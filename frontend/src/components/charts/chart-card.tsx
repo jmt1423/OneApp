@@ -60,13 +60,19 @@ type DynamicChartCardProps = {
   title: string;
   value: number | string;
   change: string;
-  color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  color?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger";
   icon?: string;
   xaxis?: "month" | "day";
   chartData: ChartData[];
 };
 
-export const DynamicChartCard: React.FC<DynamicChartCardProps> = ({
+const DynamicChartCardComponent: React.FC<DynamicChartCardProps> = ({
   title,
   value,
   change,
@@ -78,14 +84,19 @@ export const DynamicChartCard: React.FC<DynamicChartCardProps> = ({
   const styles = chartStyles({ color });
 
   return (
-    <Card className={styles.card()}>
+    <Card className={styles.card()} disableAnimation>
       <section className="flex flex-nowrap justify-between">
         <div className="flex flex-col justify-between gap-y-2 p-4">
           <div className="flex flex-col gap-y-4">
             <div className="flex items-center gap-x-3">
               {icon && (
                 <div className={styles.iconWrapper()}>
-                  <Icon className="text-inherit" height={16} icon={icon} width={16} />
+                  <Icon
+                    className="text-inherit"
+                    height={16}
+                    icon={icon}
+                    width={16}
+                  />
                 </div>
               )}
               <dt className="text-sm font-medium text-default-600">{title}</dt>
@@ -94,11 +105,19 @@ export const DynamicChartCard: React.FC<DynamicChartCardProps> = ({
           </div>
           <div className={styles.trendIconWrapper()}>
             {color === "success" ? (
-              <Icon height={16} icon={"solar:arrow-right-up-linear"} width={16} />
+              <Icon
+                height={16}
+                icon={"solar:arrow-right-up-linear"}
+                width={16}
+              />
             ) : color === "warning" ? (
               <Icon height={16} icon={"solar:arrow-right-linear"} width={16} />
             ) : (
-              <Icon height={16} icon={"solar:arrow-right-down-linear"} width={16} />
+              <Icon
+                height={16}
+                icon={"solar:arrow-right-down-linear"}
+                width={16}
+              />
             )}
             <span>{change}</span>
             <span className="text-default-500">
@@ -107,7 +126,10 @@ export const DynamicChartCard: React.FC<DynamicChartCardProps> = ({
           </div>
         </div>
         <div className="mt-10 min-h-24 w-36 min-w-[140px] shrink-0">
-          <ResponsiveContainer className="[&_.recharts-surface]:outline-none" width="100%">
+          <ResponsiveContainer
+            className="[&_.recharts-surface]:outline-none"
+            width="100%"
+          >
             <AreaChart data={chartData}>
               <defs>
                 <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
@@ -138,3 +160,4 @@ export const DynamicChartCard: React.FC<DynamicChartCardProps> = ({
   );
 };
 
+export default React.memo(DynamicChartCardComponent);
