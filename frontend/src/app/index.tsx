@@ -5,6 +5,7 @@ import { useNavigate, useHref, Route, Routes } from "react-router";
 import { NextUIProvider } from "@nextui-org/react";
 import { Sidebar } from "../components/sidebar/sidebar";
 import { items } from "../components/sidebar/sidebar-items";
+import AnalyticsHome from "./routes/analytics/analytics-home";
 
 declare module "@react-types/shared" {
   interface RouterConfig {
@@ -21,7 +22,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home/" element={<Home />} />
+        <Route path="/analytics/" element={<AnalyticsHome />} />
       </Routes>
     </NextUIProvider>
-  )
+  );
 }

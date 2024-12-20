@@ -16,7 +16,7 @@ import {
 interface InfoCardProps extends CardProps {
   title?: string;
   buttonText?: string;
-  cardData?: { title: string, note: string }[];
+  cardData?: { title: string; note: string }[];
 }
 
 const ListBoxWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -32,14 +32,13 @@ export function InfoCard({
 }: InfoCardProps) {
   return (
     <Card
-      className="overflow-none relative w-full border-small border-foreground/10"
+      className="overflow-none relative w-full border-none"
       {...props}
+      shadow="md"
     >
       <CardHeader>
         <div className="flex items-center gap-3">
-          <Avatar
-            className="border-small border-white/20 bg-transparent"
-          />
+          <Avatar className="border-small border-white/20 bg-transparent" />
           <p className="text-large font-medium text-white">{title}</p>
         </div>
       </CardHeader>
@@ -56,23 +55,29 @@ export function InfoCard({
             >
               {props.cardData
                 ? props.cardData.map((item, index) => (
-                  <ListboxItem key={index} value={item.title}>
-                    <Tooltip content={item.note} placement="right" color="secondary">
-                      <span>{item.title}</span>
-                    </Tooltip>
-                  </ListboxItem>
-                ))
+                    <ListboxItem key={index} value={item.title}>
+                      <Tooltip
+                        content={item.note}
+                        placement="right"
+                        color="secondary"
+                      >
+                        <span>{item.title}</span>
+                      </Tooltip>
+                    </ListboxItem>
+                  ))
                 : null}
             </Listbox>
           </ListBoxWrapper>
         </div>
       </CardBody>
       <CardFooter className="justify-end gap-2">
-        <Button fullWidth className="border-small border-white/20 bg-white/10 text-white">
+        <Button
+          fullWidth
+          className="border-small border-white/20 bg-white/10 text-white bg-blue-950 border-none"
+        >
           {buttonText}
         </Button>
       </CardFooter>
     </Card>
   );
 }
-
