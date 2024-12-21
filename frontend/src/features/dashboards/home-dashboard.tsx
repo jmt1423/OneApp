@@ -11,16 +11,16 @@ const EventCard = lazy(() => import("../../components/cards/event-card"));
 const chartData = [
   { month: "January", value: 1202 },
   { month: "February", value: 2402 },
-  { month: "March", value: 4400 },
-  { month: "April", value: 3200 },
-  { month: "May", value: 5200 },
-  { month: "June", value: 4200 },
+  { month: "March", value: 3943 },
+  { month: "April", value: 1492 },
+  { month: "May", value: 2342 },
+  { month: "June", value: 2012 },
   { month: "July", value: 6200 },
   { month: "August", value: 5200 },
   { month: "September", value: 7200 },
   { month: "October", value: 6200 },
-  { month: "November", value: 8200 },
-  { month: "December", value: 7200 },
+  { month: "November", value: 12200 },
+  { month: "December", value: 19203 },
 ];
 const chartData2 = [
   { month: "January", value: 120 },
@@ -66,7 +66,7 @@ const savedDashboards = [
 export default function HomeDashBoard() {
   // Memoized data to reduce re-renders
   const eventCards = useMemo(() => {
-    return Array(5).fill({
+    return Array(7).fill({
       title: "Meeting with John",
       location: "323 S Raeigh Road",
     });
@@ -74,44 +74,42 @@ export default function HomeDashBoard() {
 
   return (
     <div>
-      <Suspense fallback={<div>Loading Charts...</div>}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 grid-rows-[auto]">
-          <DynamicChartCard
-            title="Customers"
-            value="4,201"
-            change="5.9%"
-            color="primary"
-            icon="solar:spedometer-max-linear"
-            xaxis="month"
-            chartData={chartData}
-          />
-          <DynamicChartCard
-            title="Leads"
-            value="120"
-            change="-5.9%"
-            color="secondary"
-            icon="solar:users-line"
-            xaxis="month"
-            chartData={chartData2}
-          />
-          <DynamicChartCard
-            title="Total Revenue"
-            value="$220,000"
-            change="9.3%"
-            color="warning"
-            icon="solar:users-line"
-            xaxis="month"
-            chartData={chartData3}
-          />
-          <InfoCard
-            title="Data Dashboards"
-            buttonText="View All"
-            cardData={savedDashboards}
-          />
-          <InfoCard title="Databases" buttonText="Manage Databases" />
-          <InfoCard title="Tasks" buttonText="View All" />
-        </div>
-      </Suspense>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 grid-rows-[auto]">
+        <DynamicChartCard
+          title="Customers"
+          value="4,201"
+          change="5.9%"
+          color="primary"
+          icon="solar:users-line"
+          xaxis="month"
+          chartData={chartData}
+        />
+        <DynamicChartCard
+          title="Leads"
+          value="120"
+          change="-5.9%"
+          color="secondary"
+          icon="solar:users-line"
+          xaxis="month"
+          chartData={chartData2}
+        />
+        <DynamicChartCard
+          title="Total Revenue"
+          value="$220,000"
+          change="9.3%"
+          color="warning"
+          icon="solar:users-line"
+          xaxis="month"
+          chartData={chartData3}
+        />
+        <InfoCard
+          title="Data Dashboards"
+          buttonText="View All"
+          cardData={savedDashboards}
+        />
+        <InfoCard title="Databases" buttonText="Manage Databases" />
+        <InfoCard title="Tasks" buttonText="View All" />
+      </div>
 
       <div className="text-sm my-2 flex flex-wrap justify-start">
         Calendar Events
