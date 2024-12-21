@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useMemo } from "react";
 import {
   Avatar,
   Button,
@@ -16,30 +17,48 @@ import {
 interface InfoCardProps extends CardProps {
   title?: string;
   buttonText?: string;
-  cardData?: { title: string, note: string }[];
+  cardData?: { title: string; note: string }[];
 }
 
-const ListBoxWrapper = ({ children }: { children: React.ReactNode }) => (
-  <div className="w-full mb-0 border-small rounded-small border-default-200 dark:border-default-100">
-    {children}
-  </div>
+const ListBoxWrapper = React.memo(
+  ({ children }: { children: React.ReactNode }) => (
+    <div className="w-full mb-0 border-small rounded-small border-default-200 dark:border-default-100">
+      {children}
+    </div>
+  ),
 );
 
-export function InfoCard({
+const InfoCardComponent: React.FC<InfoCardProps> = ({
   title = "Default Title",
   buttonText = "Default Button Text",
+  cardData = [],
   ...props
-}: InfoCardProps) {
+}) => {
+  const memoizedItems = useMemo(
+    () =>
+      cardData.map((item, index) => (
+        <ListboxItem key={index} value={item.title}>
+          <Tooltip
+            content={item.note}
+            placement="right"
+            color="secondary"
+            showArrow
+          >
+            <span>{item.title}</span>
+          </Tooltip>
+        </ListboxItem>
+      )),
+    [cardData],
+  );
+
   return (
     <Card
-      className="overflow-none relative w-full border-small border-foreground/10"
+      className="overflow-hidden relative w-full border-none shadow-md"
       {...props}
     >
       <CardHeader>
         <div className="flex items-center gap-3">
-          <Avatar
-            className="border-small border-white/20 bg-transparent"
-          />
+          <Avatar className="border-small border-white/20 bg-transparent" />
           <p className="text-large font-medium text-white">{title}</p>
         </div>
       </CardHeader>
@@ -54,25 +73,21 @@ export function InfoCard({
                 itemHeight: 35,
               }}
             >
-              {props.cardData
-                ? props.cardData.map((item, index) => (
-                  <ListboxItem key={index} value={item.title}>
-                    <Tooltip content={item.note} placement="right" color="secondary">
-                      <span>{item.title}</span>
-                    </Tooltip>
-                  </ListboxItem>
-                ))
-                : null}
+              {memoizedItems}
             </Listbox>
           </ListBoxWrapper>
         </div>
       </CardBody>
       <CardFooter className="justify-end gap-2">
-        <Button fullWidth className="border-small border-white/20 bg-white/10 text-white">
+        <Button
+          fullWidth
+          className="border-small border-white/20 bg-white/10 text-white bg-blue-950 border-none"
+        >
           {buttonText}
         </Button>
       </CardFooter>
     </Card>
   );
-}
+};
 
+export default React.memo(InfoCardComponent);

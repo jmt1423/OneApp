@@ -17,7 +17,11 @@ export const items = [
     icon: "solar:widget-2-outline",
     title: "Projects",
     endContent: (
-      <Icon className="text-default-400" icon="solar:add-circle-line-duotone" width={24} />
+      <Icon
+        className="text-default-400"
+        icon="solar:add-circle-line-duotone"
+        width={24}
+      />
     ),
   },
   {
@@ -26,7 +30,11 @@ export const items = [
     icon: "solar:checklist-minimalistic-outline",
     title: "Tasks",
     endContent: (
-      <Icon className="text-default-400" icon="solar:add-circle-line-duotone" width={24} />
+      <Icon
+        className="text-default-400"
+        icon="solar:add-circle-line-duotone"
+        width={24}
+      />
     ),
   },
   {
@@ -42,5 +50,3 @@ export const items = [
     title: "Settings",
   },
 ];
-
-
